@@ -1,4 +1,5 @@
 
+
 from django.http import HttpRequest, HttpResponse
 from django.shortcuts import render, redirect
 
@@ -24,8 +25,8 @@ def create_event_item (request):
     context={"form":form }
     return render (request, "create_event_item.html", context )
 
-def update_store_item (request,item_id ):
-    store_item=EventItem.objects.get(id= item_id)
+def update_event_item (request,item_id ):
+    event_item=EventItem.objects.get(id= item_id)
     form= EventItemForm(instance=event_item)
     context= {"form":form,
     "event_item":{"id":event_item.id}}

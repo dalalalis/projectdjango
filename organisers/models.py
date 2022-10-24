@@ -1,8 +1,9 @@
+from unittest.util import _MAX_LENGTH
 from django.db import models
 from django.core.validators import MaxValueValidator
 
 # Create your models here.
-class EventItem(models.Models):
+class EventItem(models.Model):
     name=models.CharField(max_length=30)
     image=models.TextField()
     #using the method she taught us yesterday
@@ -11,8 +12,8 @@ class EventItem(models.Models):
     numberofseats=models.PositiveIntegerField(validators=[
             MaxValueValidator(400), ])
 
-    dateofevent=models.DateTimeField(input_formats=["%d/%m/%Y %H:%M"])
-    
+    dateofevent=models.CharField(max_length=12)
+    #input_formats=["%d/%m/%Y %H:%M"]
     #bookedseats=
 
     def __str__(self):
