@@ -15,7 +15,14 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
+from users import views 
+#check how to use user_views find it url in project
+#check if need to import class 
 
 urlpatterns = [
     path('admin/', admin.site.urls),
+    path('', views.home, name='home'),
+    path("register/", views.register_user, name="register"),
+    path("logout/", views.logout_user, name="logout"),
+    path("login/", views.login_user, name="login"),
 ]
