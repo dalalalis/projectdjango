@@ -15,14 +15,20 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
-from users import views 
+from users import views as users_views
+from organisers import views as event_views 
 #check how to use user_views find it url in project
 #check if need to import class 
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('', views.home, name='home'),
-    path("register/", views.register_user, name="register"),
-    path("logout/", views.logout_user, name="logout"),
-    path("login/", views.login_user, name="login"),
+    path('', event_views.home, name='home'),
+    path("organiser/", event_views.get_event_items, name="event-item-list"),
+    path("organiser/add/", event_views.create_event_item, name="create-event-item" ),
+    path("organiser/edit/<int:item_id>/", event_views.update_event_item, name="update-event-item" ),
+    path("organiser/delete/<int:item_id>/", event_views.delete_event_item, name="delete-event-item"),
+
+    #path("register/", views.register_user, name="register"),
+    #path("logout/", views.logout_user, name="logout"),
+    #path("login/", views.login_user, name="login"),
 ]
