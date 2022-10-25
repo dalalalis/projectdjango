@@ -2,7 +2,7 @@
 
 <!DOCTYPE html>
 <html lang="en">
-<head>
+  <head>
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -13,26 +13,35 @@
       integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi"
       crossorigin="anonymous"
     />
-    <title>
-        {% block event_items %}
+    <title>{% block event_items %} {% endblock event_items %}</title>
+  </head>
 
-        {% endblock event_items %}
-    </title>
-</head>
-
-<body>
-        <nav class="navbar navbar-warning bg-warning">
-          <div class="container-fluid">
-            <a class="navbar-brand">Eventat</a>
-          </div>
-        </nav>
+  <body>
+    <nav class="navbar navbar-warning bg-warning">
+      <div class="container-fluid">
+        <a class="navbar-brand">Eventat</a>
+      </div>
+      {% if request.user.is_authenticated %}
+      <button class="btn btn-dark">
+        <a href="{% url 'logout' %}">logout</a>
+      </button>
+      {% else %}
+      <button class="btn btn-dark">
+        <a href="{% url 'register' %}">register</a>
+      </button>
+      <button class="btn btn-dark">
+        <a href="{% url 'login' %}">login</a>
+      </button>
+      {% endif %}
+    </nav>
     <div>
-        {% block content %}
-        <fotter>  
-        <p class="MuiTypogrophy-root text-muted MuiTypography-caption"> 2022 django project</p> 
-        </fotter> 
-        {% endblock content%}
+      {% block content %}
+      <fotter>
+        <p class="MuiTypogrophy-root text-muted MuiTypography-caption">
+          2022 django project
+        </p>
+      </fotter>
+      {% endblock content%}
     </div>
-</body>
-
+  </body>
 </html>

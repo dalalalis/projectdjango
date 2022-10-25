@@ -43,7 +43,7 @@ def login_user(request):
 
 def logout_user(request):
     logout(request)
-    return redirect("home")
+    return redirect("event-item-list")
 
 #used to redirect user to login page (book button in home page)
 #from django.shortcuts import redirect
