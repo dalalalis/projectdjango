@@ -15,9 +15,10 @@ def get_event_items(request: HttpRequest) -> HttpResponse:
     }
     return render(request, "event_item_list.html", context)
 
-def create_event_item (request):
+def create_event_item(request):
     form= EventItemForm()
     if request.method == "POST":
+        print("here")
         form=EventItemForm(request.POST)
         if form.is_valid():
             form.save()

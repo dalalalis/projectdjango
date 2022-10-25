@@ -17,6 +17,7 @@ from django.contrib import admin
 from django.urls import path
 #from users import views as users_views
 from organisers import views as event_views 
+from users import views as user_views
 #check how to use user_views find it url in project
 #check if need to import class 
 
@@ -28,7 +29,7 @@ urlpatterns = [
     path("organiser/edit/<int:item_id>/", event_views.update_event_item, name="update-event-item" ),
     path("organiser/delete/<int:item_id>/", event_views.delete_event_item, name="delete-event-item"),
 
-    #path("register/", views.register_user, name="register"),
-    #path("logout/", views.logout_user, name="logout"),
-    #path("login/", views.login_user, name="login"),
+    path("register/", user_views.register_user, name="register"),
+    path("logout/", user_views.logout_user, name="logout"),
+    path("login/", user_views.login_user, name="login"),
 ]

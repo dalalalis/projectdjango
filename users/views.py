@@ -1,6 +1,5 @@
 from django.shortcuts import render, redirect
 from users.forms import User_register, User_login
-from .forms import User_register
 from django.contrib.auth import login, authenticate, logout
 
 def register_user(request):
@@ -10,11 +9,11 @@ def register_user(request):
         if form.is_valid():
             user=form.save(commit=False)
 
-            user.set.password(user.password)
+            user.set.password(user.password)  # error with access 
             user.save()
 
             login(request, user)
-            return redirect("home.html")
+            return redirect("event_item_list")
     context ={"form":form,}
     return render(request, "register.html", context)
 
@@ -30,7 +29,7 @@ def login_user(request):
             if auth_user is not None:
                 login(request, auth_user)
 
-                return redirect("home")
+                return redirect("event_item_list")
     context ={"form":form,}
     return render(request, "login.html", context)
 #here i think we should have to add the <is staff> to diffrentiate between user and organizer

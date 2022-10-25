@@ -6,31 +6,39 @@
 
 {% block content %}
 
-{% for event in Eventlist %}
-    <div>
-        <a class="badge rounded-pill bg-success" href="{% url 'create-event-item'%}"> 
-        Add Event </a>
-    </div>
-    <div class="container  overflow-hidden">
-      <h1 class="text-center">Events</h1>
-      <div class="row g-3 ">
-        <div class="col-lg-4">
-          <div class="card">
-            <div class="card-body">
-              <img
-              src={{item.image}}
-              class="card-img-top"
-              alt={{item.name}}
-              />
-              <h5 class="card-title">{{ item.name }}</h3>
-                <h6 class="card-subtitle mb-2 text-muted">Kind: {{ item.organiser }}</h6>
-                <p class="card-text">{{ item.numberofseats }}</p> 
-              </div>
-            </div>
+<div>
+    <a class="badge rounded-pill bg-success" href="{% url 'create-event-item'%}"> 
+    Add Event </a>
+</div>
+<div class="container  overflow-hidden">
+  <h1 class="text-center">Events</h1>
+  <div class="row g-3 ">
+    <div class="col-lg-4">
+      <div class="card">
+        <div class="card-body">
+          <img
+          src={{item.image}}
+          class="card-img-top"
+          alt={{item.name}}
+          />
+          <h5 class="card-title">{{ item.name }}</h3>
+            <h6 class="card-subtitle mb-2 text-muted">Kind: {{ item.organiser }}</h6>
+            <p class="card-text">{{ item.numberofseats }}</p> 
+          </div>
         </div>
-        {% endfor %} 
-        <p>No Event Stay Tuned for Updates!</p>
-        {% endblock content %}
+      </div>
+      
+      
+      <!-- add if to show the line if there is no events -->
+      
+      
+      <!-- {% for event in Eventlist %} -->
+      
+      <p>No Event Stay Tuned for Updates!</p>
+      
+      
+      <!-- {% endfor %}  -->
+      {% endblock content %}
       </div>
     </div>
     <script
