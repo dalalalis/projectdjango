@@ -19,7 +19,7 @@ def create_event_item(request):
     form= EventItemForm()
     if request.method == "POST":
         print("here")
-        form=EventItemForm(request.POST)
+        form=EventItemForm(request.POST, request.FILES)
         if form.is_valid():
             form.save()
         return redirect("event-item-list")

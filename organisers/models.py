@@ -5,7 +5,7 @@ from django.core.validators import MaxValueValidator
 # Create your models here.
 class EventItem(models.Model):
     name=models.CharField(max_length=30)
-    image=models.TextField()
+    image=models.ImageField()
     #using the method she taught us yesterday
     organiser=models.TextField()
     #im guessing this is the foreign key 
