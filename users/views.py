@@ -14,7 +14,7 @@ def register_user(request):
 
             login(request, user)
             if user.is_staff:
-                return redirect("create-event-item")
+                return redirect("event-item-list")
             else:
                 return redirect("event-item-list")
     context ={"form":form,}
@@ -32,7 +32,7 @@ def login_user(request):
             if auth_user is not None:
                 login(request, auth_user)
                 if auth_user.is_staff:
-                    return redirect("create-event-item")
+                    return redirect("event-item-list")
                 else:
                     return redirect("event-item-list")
                     

@@ -5,7 +5,7 @@ from .models import EventItem
 class EventItemForm(forms.ModelForm):
     class Meta:
         model=EventItem
-        fields=["name", "numberofseats", "image", "organiser", "dateofevent",]
+        fields=["name", "numberofseats", "image", "dateofevent",]
 
         
         
