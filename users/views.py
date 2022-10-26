@@ -9,18 +9,21 @@ def register_user(request):
         if form.is_valid():
             user=form.save(commit=False)
 
-            user.set.password(user.password)  # error with access 
+            user.set_password(user.password)  # error with access 
             user.save()
 
             login(request, user)
-            return redirect("event_item_list")
+            if user.is_staff:
+                return redirect("create-event-item")
+            else:
+                return redirect("event-item-list")
     context ={"form":form,}
     return render(request, "register.html", context)
 
 def login_user(request):
     form =User_login()
-    if request.method== "POST":
-        form=User_login(request, "POST")
+    if request.method == "POST":
+        form = User_login(request.POST)
         if form.is_valid():
             username = form.cleaned_data["username"]
             password=form.cleaned_data["password"]
@@ -28,8 +31,11 @@ def login_user(request):
             auth_user= authenticate(username=username, password=password)
             if auth_user is not None:
                 login(request, auth_user)
-
-                return redirect("event_item_list")
+                if auth_user.is_staff:
+                    return redirect("create-event-item")
+                else:
+                    return redirect("event-item-list")
+                    
     context ={"form":form,}
     return render(request, "login.html", context)
 #here i think we should have to add the <is staff> to diffrentiate between user and organizer
@@ -37,7 +43,7 @@ def login_user(request):
 
 def logout_user(request):
     logout(request)
-    return redirect("register")
+    return redirect("event-item-list")
 
 #used to redirect user to login page (book button in home page)
 #from django.shortcuts import redirect
