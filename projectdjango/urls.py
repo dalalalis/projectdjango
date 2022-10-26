@@ -18,6 +18,9 @@ from django.urls import path
 #from users import views as users_views
 from organisers import views as event_views 
 from users import views as user_views
+from django.conf import settings
+from django.conf.urls.static import static 
+
 #check how to use user_views find it url in project
 #check if need to import class 
 
@@ -33,3 +36,6 @@ urlpatterns = [
     path("logout/", user_views.logout_user, name="logout"),
     path("login/", user_views.login_user, name="login"),
 ]
+
+if settings.DEBUG:
+    urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

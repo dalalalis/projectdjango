@@ -7,8 +7,12 @@
 {% block content %}
 
 <div>
+  {% if request.user.is_staff %}
     <a class="badge rounded-pill bg-success" href="{% url 'create-event-item'%}"> 
     Add Event </a>
+  {% else %}
+
+  {% endif %}
 </div>
 <div class="container  overflow-hidden">
   <h1 class="text-center">Events</h1>

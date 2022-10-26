@@ -19,7 +19,7 @@ def create_event_item(request):
     form= EventItemForm()
     if request.method == "POST":
         print("here")
-        form=EventItemForm(request.POST)
+        form=EventItemForm(request.POST, request.FILES)
         if form.is_valid():
             form.save()
         return redirect("event-item-list")
@@ -32,7 +32,7 @@ def update_event_item (request,item_id ):
     context= {"form":form,
     "event_item":{"id":event_item.id}}
     if request.method == "POST":
-        form=EventItemForm(request.POST, instance=event_item)
+        form=EventItemForm(request.POST, instance=event_item )
         if form.is_valid():
             form.save()
             return redirect("event-item-list")
