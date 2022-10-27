@@ -37,7 +37,7 @@ urlpatterns = [
     path("register/", user_views.register_user, name="register"),
     path("logout/", user_views.logout_user, name="logout"),
     path("login/", user_views.login_user, name="login"),
-    path("user/<int:user_id>",user_views.edit_profile, name="user-edit")
+    path("user/",user_views.edit_profile, name="user-edit")
 ]
 
 if settings.DEBUG:

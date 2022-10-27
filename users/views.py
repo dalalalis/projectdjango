@@ -49,10 +49,9 @@ def logout_user(request):
     return redirect("event-item-list")
 
 def edit_profile(request):
-    print("print")
-    user=User.objects.get(request.user.id)
+    user=User.objects.get(id= request.user.id)
     form=User_edit(instance=user)
-    print("hellos")
+    print(user)
     if request.method == "POST":
         form=User_edit(request.POST, instance=user)
         print("hi")

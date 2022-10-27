@@ -8,7 +8,7 @@ from .models import EventItem
 import datetime
 from django.contrib.auth import get_user_model
 from datetime import datetime
-
+from .models import Booking 
 user=get_user_model()
 
 # Create your views here.
@@ -85,6 +85,13 @@ def update_event_item (request,item_id ):
 def delete_event_item (request, event_id):
     event=EventItem.objects.get(id=event_id).delete()
     return redirect("event-item-list")
+
+
+# def Booking(request,):
+#     seats=Booking.objects.get(request.event.numberofseats)
+#     seatsavailable=seats-
+
+#     return render ("you booking is ready ")
 
 
 
