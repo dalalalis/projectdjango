@@ -1,6 +1,9 @@
 from django.shortcuts import render, redirect
-from users.forms import User_register, User_login
+from users.forms import User_register, User_edit, User_login
 from django.contrib.auth import login, authenticate, logout
+from django.contrib.auth import get_user_model
+
+User=get_user_model()
 
 def register_user(request):
     form=User_register()
@@ -44,6 +47,26 @@ def login_user(request):
 def logout_user(request):
     logout(request)
     return redirect("event-item-list")
+
+def edit_profile(request):
+    print("print")
+    user=User.objects.get(request.user.id)
+    form=User_edit(instance=user)
+    print("hellos")
+    if request.method == "POST":
+        form=User_edit(request.POST, instance=user)
+        print("hi")
+        if form.is_valid():
+            form.save()
+            return redirect("event-item-list")
+    context= {"form":form,
+    "user":{"id":user.id}}
+    return render (request, "profile.html", context) 
+
+
+    '''
+    make booking
+    '''
 
 #used to redirect user to login page (book button in home page)
 #from django.shortcuts import redirect

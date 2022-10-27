@@ -7,43 +7,53 @@ from .forms import EventItemForm
 from .models import EventItem
 import datetime
 from django.contrib.auth import get_user_model
+from datetime import datetime
 
-User=get_user_model()
+user=get_user_model()
+
 # Create your views here.
 
-def get_event_items(request: HttpRequest) -> HttpResponse:  
-      event_items: list[models.EventItem] = list[models.EventItem.objects.all()]    
-      context = {"event_items": event_items,}    
-      return render(request, "event_item_list.html", context)
+# def get_event_items(request: HttpRequest) -> HttpResponse:  
+#     event_items: list[models.EventItem] = list[models.EventItem.objects.all()]    
+#     context = {"event_items": event_items,}    
+#     return render(request, "event_item_list.html", context)
 
-'''
-def get_event_items(request.user):
+
+def get_event_items(request):
+   
     if request.user.is_staff:
-        events=EventItem.objects.filter(id=user.id)
-        _events=[]
-        for event in events:
-            if event.date >datetime.now():
-                return _events.append(
-                    {"id": event.id, 
+        print("STAFF")
+        events=EventItem.objects.filter(user=request.user).exclude(dateofevent__lte=datetime.today())
+    else:
+        print("NOT STAFF")
+        events=EventItem.objects.all().exclude(dateofevent__lte=datetime.today())
+    _events=[]
+    for event in events:
+        _events.append(
+                {"id":event.id,
+                "user": event.user , 
+                "name": event.name,
+                "image": event.image,
+                "dateofevent": event.dateofevent,
+                "numberofseats": event.numberofseats,
+                } )  
+
+    context = {"events": _events}
+    print(context)
+    return render (request, "event_item_list.html", context)   
+
+def get_event(request): #<<<<<<<<<id >>>>>>
+    event=EventItem.objects.get(id=event.id)
+    context = {
+        "event": {event:{"id": id, 
                     "name": event.name,
                     "image": event.image,
                     "dateofevent": event.dateofevent,
                     "numberofseats": event.numberofseats,
-                    } )
-            else: 
-                return 
-    else:
-        events=Event.object.all()
-        _events=[]
-        return _events.append()
+                    }}}  
 
-    context = {"events": _events}
-    return render (request, "event_item_list.html", context)   
-  '''               
+    return render(request, "article_detail_page.html", context)
 
-
-
-                
 
 def create_event_item(request):
     form= EventItemForm()
@@ -52,9 +62,13 @@ def create_event_item(request):
         form=EventItemForm(request.POST, request.FILES)
         if form.is_valid():
             form.save()
-        return redirect("event-item-list")
+            return redirect("event-item-list")
     context={"form":form }
     return render (request, "create_event_item.html", context )
+
+def home_page(request):
+    print(user.objects)
+    return render (request, "hello.html")
 
 def update_event_item (request,item_id ):
     event_item=EventItem.objects.get(id= item_id)
@@ -68,8 +82,8 @@ def update_event_item (request,item_id ):
             return redirect("event-item-list")
     return render (request, "update_event_item.html", context)
 
-def delete_event_item (request, item_id):
-    event_item=EventItem.objects.get(id=item_id).delete()
+def delete_event_item (request, event_id):
+    event=EventItem.objects.get(id=event_id).delete()
     return redirect("event-item-list")
 
 

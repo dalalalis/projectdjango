@@ -33,10 +33,11 @@ urlpatterns = [
     path("organiser/add/", event_views.create_event_item, name="create-event-item" ),
     path("organiser/edit/<int:item_id>/", event_views.update_event_item, name="update-event-item" ),
     path("organiser/delete/<int:item_id>/", event_views.delete_event_item, name="delete-event-item"),
-
+    path("hello/", event_views.home_page, name="home" ),
     path("register/", user_views.register_user, name="register"),
     path("logout/", user_views.logout_user, name="logout"),
     path("login/", user_views.login_user, name="login"),
+    path("user/<int:user_id>",user_views.edit_profile, name="user-edit")
 ]
 
 if settings.DEBUG:
