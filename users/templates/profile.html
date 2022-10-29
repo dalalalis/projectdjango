@@ -1,11 +1,16 @@
 {% extends "base-file.html" %}
 {% load crispy_forms_tags %}
+
+
+
 {% block title %} Profile
      {% endblock title %}  
 
 
      {% block content %} 
-    <form action="{% url 'user-edit' %}" method="POST">
+     <body> 
+      
+    <form action="{% url 'user-edit' user_id=user.id %}"  method="POST">
 
       {% csrf_token %} {{form|crispy }}
       <button type="submit">update</button>

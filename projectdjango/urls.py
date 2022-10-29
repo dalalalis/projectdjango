@@ -22,6 +22,10 @@ from organisers import views as event_views
 from users import views as user_views
 from django.conf import settings
 from django.conf.urls.static import static 
+from users.views import booking as user_booking
+from users import views as booking
+from users import views as booking_details
+
 
 #check how to use user_views find it url in project
 #check if need to import class 
@@ -37,7 +41,9 @@ urlpatterns = [
     path("register/", user_views.register_user, name="register"),
     path("logout/", user_views.logout_user, name="logout"),
     path("login/", user_views.login_user, name="login"),
-    path("user/",user_views.edit_profile, name="user-edit")
+    path("user/<int:user_id>/",user_views.edit_profile, name="user-edit"),
+    path("booking/", user_views.booking, name="booking"),
+    path("details/", user_views.booking_details, name="booking-details")
 ]
 
 if settings.DEBUG:

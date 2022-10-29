@@ -1,0 +1,16 @@
+{% extends "base-file.html" %}
+{% load crispy_forms_tags %}
+{% block title %} 
+   Event Details Page
+{% endblock title %}
+
+{% block content %}
+ 
+ <p> {{details.number_of_seats}}</p>
+ <p> {{details.date_of_event}}</p>
+
+<!-- add tags like a tag for action  -->
+{% csrf_token %}  {{form|crispy}}
+
+<!-- add a button here or something -->
+{% endblock content%}

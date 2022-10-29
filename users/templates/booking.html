@@ -1,0 +1,14 @@
+{% extends "base-file.html" %}
+{% load crispy_forms_tags %}
+{% block title %} 
+   Booking Page
+{% endblock title %} 
+
+
+{% block content %}
+ {{%booking_list%}}
+
+{% csrf_token %}  {{form|crispy}}
+
+<!-- add a button here or something -->
+{% endlock content%}

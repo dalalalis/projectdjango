@@ -17,7 +17,7 @@ class User_login(forms.Form):
 class User_edit(forms.ModelForm):
     class Meta:
         model=User
-        fields=[ "first_name", "last_name", "email",]
+        fields=[ "first_name", "last_name", "email"]
         
 
  

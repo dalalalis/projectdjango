@@ -8,7 +8,9 @@ from .models import EventItem
 import datetime
 from django.contrib.auth import get_user_model
 from datetime import datetime
-from .models import Booking 
+
+
+
 user=get_user_model()
 
 # Create your views here.
@@ -58,11 +60,15 @@ def get_event(request): #<<<<<<<<<id >>>>>>
 def create_event_item(request):
     form= EventItemForm()
     if request.method == "POST":
-        print("here")
+        print("HERE\n") # the print work
         form=EventItemForm(request.POST, request.FILES)
+        print("******************\n") #it works
         if form.is_valid():
-            form.save()
+            print("HELLO\n") # it works
+            form.save() # the code stops here, why?
             return redirect("event-item-list")
+        else:
+            print("\n HI \n") # doesn't print 
     context={"form":form }
     return render (request, "create_event_item.html", context )
 
@@ -86,12 +92,6 @@ def delete_event_item (request, event_id):
     event=EventItem.objects.get(id=event_id).delete()
     return redirect("event-item-list")
 
-
-# def Booking(request,):
-#     seats=Booking.objects.get(request.event.numberofseats)
-#     seatsavailable=seats-
-
-#     return render ("you booking is ready ")
 
 
 
