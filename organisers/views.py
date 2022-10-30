@@ -64,8 +64,10 @@ def create_event_item(request):
         form=EventItemForm(request.POST, request.FILES)
         print("******************\n") #it works
         if form.is_valid():
-            print("HELLO\n") # it works
-            form.save() # the code stops here, why?
+            user = form.save(commit=False)
+            user.set_request(user)# problem in this line  
+            print("HELLO\n") # stoped working 
+            user.save() # the code stops here, why? now this doesn't work because of line 68
             return redirect("event-item-list")
         else:
             print("\n HI \n") # doesn't print 

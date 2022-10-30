@@ -66,10 +66,10 @@ def edit_profile(request, user_id):
     return render (request, "profile.html", context) 
 
 
-def booking(request,seats):
-    event_booking = Booking.objects(seats)
-    list = []
-    booking_list = Booking.objects.filter(seats)
+def booking(request,booker,event):
+    '''
+    list = [] # empty list to fill the booking in it 
+    booking_list = Booking.objects.filter(booker) #filtring to append 
     for book in booking_list:
         if book in booking_list:
             list.append(True)
@@ -77,11 +77,14 @@ def booking(request,seats):
         else:
             list.append(False)
         return all(list)
-    context = {"event_booking":event_booking, "seats": "seats", }
+    '''
+    event_booking = EventItem.objects.get(id=booker.id) # fetching the user to book an event
+    
+    context = {"event_booking":event_booking, "booker": booker, "event": event }
     return render (request, "booking.html", context)
 
 def booking_details(request):
-    details = Booking.objects()
+    details = Booking.objects.get()
     context = {
         "details":{
             "number_of_seats": "number of seats",
@@ -106,6 +109,9 @@ def fully_booked(request):
     return render (request, "booking.html", context)
     # check for count 
     '''
+
+
+
 #used to redirect user to login page (book button in home page)
 #from django.shortcuts import redirect
 #def some_view(request):

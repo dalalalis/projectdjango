@@ -20,8 +20,8 @@ class EventItem(models.Model):
         return self.name 
 
 class Booking(models.Model):
-    book = models.ForeignKey("Booking", on_delete=models.CASCADE ,default=None)  # to test the booking 
-    event =models.OneToOneField(EventItem, on_delete=models.CASCADE, primary_key=TRUE) #1 booking for each user
+    booker = models.ForeignKey(User, on_delete=models.CASCADE ,default=None)  # to test the booking 
+    event =models.ForeignKey(EventItem, on_delete=models.CASCADE) #1 booking for each user
     seatbooked=models.IntegerField()
 
     def ___str__(self):
